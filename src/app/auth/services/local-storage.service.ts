@@ -24,4 +24,7 @@ export class LocalStorageService {
 
     return null;
   }
+  public obterTokenUsuario(): string{
+    return localStorage.getItem("eAgenda.token") ?? '';
+  }
 }
