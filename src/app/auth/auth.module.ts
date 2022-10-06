@@ -5,16 +5,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { RouterModule } from '@angular/router';
 import { LocalStorageService } from './services/local-storage.service';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './services/auth.guard';
+import { LoginGuard } from './services/login.guard';
 
 
 
 @NgModule({
-  declarations: [RegistroComponent],
+  declarations: [RegistroComponent, LoginComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule
   ],
-  providers:[AuthService, LocalStorageService]
+  providers:[AuthService, LocalStorageService, AuthGuard, LoginGuard]
 })
 export class AuthModule { }
