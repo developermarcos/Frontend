@@ -10,13 +10,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EditarTarefaComponent } from './editar/editar-tarefa.component';
 import { FormTarefaResolver } from './services/forms-tarefa.resolver';
+import { ExcluirTarefaComponent } from './excluir/excluir-tarefa.component';
+import { VisualizarTarefaResolver } from './services/visualizar-tarefa.resolver';
 
 @NgModule({
   declarations: [
     TarefaAppComponent,
     ListarTarefaComponent,
     InserirTarefaComponent,
-    EditarTarefaComponent
+    EditarTarefaComponent,
+    ExcluirTarefaComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +29,8 @@ import { FormTarefaResolver } from './services/forms-tarefa.resolver';
   ],
   providers:[
     TarefaService,
-    FormTarefaResolver
+    FormTarefaResolver,
+    VisualizarTarefaResolver
   ]
 })
 export class TarefaModule { }

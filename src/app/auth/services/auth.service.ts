@@ -8,13 +8,13 @@ import { TokenViewModel } from "../view-models/token.view.model";
 
 @Injectable()
 export class AuthService{
-  private apiUrl: string = environment.apiUrl;
+  private apiUrl: string = environment.apiUrl.concat('conta/');
 
   constructor(private http: HttpClient) { }
 
   public registrarUsuario(registro: RegistrarUsuarioViewModel): Observable<TokenViewModel> {
     const resposta = this.http
-      .post(this.apiUrl + "conta/registrar", registro, this.obterHeaderJson())
+      .post(this.obterUrlConsulta('registrar'), registro, this.obterHeaderJson())
       .pipe(map(this.processarDados), catchError(this.processarFalha));
 
     return resposta;
@@ -22,12 +22,18 @@ export class AuthService{
 
   public login(usuario: AutenticarUsuarioViewModel): Observable<TokenViewModel> {
     const resposta = this.http
-      .post(this.apiUrl + 'conta/autenticar', usuario, this.obterHeaderJson())
+      .post(this.obterUrlConsulta('autenticar'), usuario, this.obterHeaderJson())
       .pipe(map(this.processarDados), catchError(this.processarFalha));
 
     return resposta;
   }
-
+  logout() {
+    const resposta = this.http.post(this.obterUrlConsulta('sair'),this.obterHeaderJson());
+    return resposta;
+  }
+  private obterUrlConsulta(metodo: string = ''): string{
+    return this.apiUrl.concat(metodo);
+  }
   private processarDados(resposta: any) {
     if (resposta.sucesso)
       return resposta.dados;
