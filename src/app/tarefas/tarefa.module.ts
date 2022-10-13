@@ -9,6 +9,7 @@ import { InserirTarefaComponent } from './inserir/inserir-tarefa.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EditarTarefaComponent } from './editar/editar-tarefa.component';
+import { FormTarefaResolver } from './services/forms-tarefa.resolver';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EditarTarefaComponent } from './editar/editar-tarefa.component';
     NgSelectModule
   ],
   providers:[
-    TarefaService
+    TarefaService,
+    FormTarefaResolver
   ]
 })
 export class TarefaModule { }

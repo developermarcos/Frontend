@@ -9,8 +9,7 @@ import { ListarTarefaViewModel } from "../view-models/listar-tarefa.view.models"
 @Injectable()
 export class TarefaService{
   
-
-  private apiUrl: string = environment.apiUrl;
+  private apiUrl: string = environment.apiUrl.concat('Tarefas/');
 
   constructor(
     private http: HttpClient,
@@ -18,15 +17,28 @@ export class TarefaService{
   ){ }
   public selecionarTodos(): Observable<ListarTarefaViewModel[]>{
     const resposta = this.http
-      .get<ListarTarefaViewModel[]>(this.apiUrl+'Tarefas', this.obterHeadersAutorizacao())
+      .get<ListarTarefaViewModel[]>(this.apiUrl, this.obterHeadersAutorizacao())
       .pipe(map(this.processarDados), catchError(this.processarFalha));
       
     return resposta;
   }
   public inserir(tarefaVM: FormsTarefaViewModel): Observable<FormsTarefaViewModel> {
     const resposta = this.http
-      .post<FormsTarefaViewModel>(this.apiUrl + 'Tarefas', tarefaVM, this.obterHeadersAutorizacao())
+      .post<FormsTarefaViewModel>(this.apiUrl, tarefaVM, this.obterHeadersAutorizacao())
       .pipe(map(this.processarDados), catchError(this.processarFalha));
+
+    return resposta;
+  }
+  editar(tarefaFormVM: FormsTarefaViewModel): Observable<FormsTarefaViewModel>  {
+    const resposta = this.http
+    .put<FormsTarefaViewModel>(this.apiUrl + tarefaFormVM.id, tarefaFormVM, this.obterHeadersAutorizacao())
+    .pipe(map(this.processarDados), catchError(this.processarFalha));
+
+    return resposta;
+  }
+  public selecionarPorId(id: string): Observable<FormsTarefaViewModel>{
+    const resposta = this.http.get<FormsTarefaViewModel>(this.apiUrl.concat(id), this.obterHeadersAutorizacao())
+    .pipe(map(this.processarDados), catchError(this.processarFalha));
 
     return resposta;
   }
