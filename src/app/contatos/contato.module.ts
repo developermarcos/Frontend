@@ -9,6 +9,8 @@ import { InserirContatoComponent } from './inserir/inserir-contato.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditarContatoComponent } from './editar/editar-contato.component';
 import { VisualizarContatoResolver } from './services/visualizar-contato.resolver';
+import { ExcluirContatoComponent } from './excluir/excluir-contato.component';
+import { FormContatoResolver } from './services/form-contato.resolver';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { VisualizarContatoResolver } from './services/visualizar-contato.resolve
     ContatoAppComponent,
     ListarContatosComponent,
     InserirContatoComponent,
-    EditarContatoComponent
+    EditarContatoComponent,
+    ExcluirContatoComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +28,7 @@ import { VisualizarContatoResolver } from './services/visualizar-contato.resolve
   ],
   providers:[
     ContatoService,
+    FormContatoResolver,
     VisualizarContatoResolver
   ]
 })

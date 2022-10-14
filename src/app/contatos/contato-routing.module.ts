@@ -3,8 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/services/auth.guard';
 import { ContatoAppComponent } from './contato-app.component';
 import { EditarContatoComponent } from './editar/editar-contato.component';
+import { ExcluirContatoComponent } from './excluir/excluir-contato.component';
 import { InserirContatoComponent } from './inserir/inserir-contato.component';
 import { ListarContatosComponent } from './listar/listar-contatos.component';
+import { FormContatoResolver } from './services/form-contato.resolver';
 import { VisualizarContatoResolver } from './services/visualizar-contato.resolver';
 
 const routes: Routes = [
@@ -19,6 +21,11 @@ const routes: Routes = [
       {
         path:'editar/:id', 
         component: EditarContatoComponent, 
+        resolve: {contato: FormContatoResolver}
+      },
+      {
+        path:'excluir/:id', 
+        component: ExcluirContatoComponent, 
         resolve: {contato: VisualizarContatoResolver}
       },
     ]

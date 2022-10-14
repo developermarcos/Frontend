@@ -46,4 +46,11 @@ export class ContatoService extends SharedService{
       
     return resposta;
   }
+  public excluir(id: string): Observable<string>{
+    const resposta = this.http
+      .delete<FormContatoViewModel>(this.obterUrl(id), this.obterHeadersAutorizacao())
+      .pipe(map(this.processarDados), catchError(this.processarFalha));
+      
+    return resposta;
+  }
 }
