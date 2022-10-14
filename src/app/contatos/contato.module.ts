@@ -5,16 +5,20 @@ import { ContatoRoutingModule } from './contato-routing.module';
 import { ContatoAppComponent } from './contato-app.component';
 import { ListarContatosComponent } from './listar/listar-contatos.component';
 import { ContatoService } from './services/contato.service';
+import { InserirContatoComponent } from './inserir/inserir-contato.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     ContatoAppComponent,
-    ListarContatosComponent
+    ListarContatosComponent,
+    InserirContatoComponent
   ],
   imports: [
     CommonModule,
-    ContatoRoutingModule
+    ContatoRoutingModule,
+    ReactiveFormsModule
   ],
   providers:[
     ContatoService

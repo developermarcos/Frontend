@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { ContatoService } from '../services/contato.service';
 import { ListarContatoViewModel } from '../view-model/ListarContatoViewModel';
@@ -13,7 +14,9 @@ export class ListarContatosComponent implements OnInit {
 
   contatos$: Observable<ListarContatoViewModel[]>;
 
-  constructor(private contatoService: ContatoService) { }
+  constructor(titulo: Title,private contatoService: ContatoService) { 
+    titulo.setTitle("Listar Contato - e-Agenda");
+  }
 
   ngOnInit(): void {
     this.contatos$ = this.contatoService.selecionarTodos();
