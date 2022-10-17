@@ -1,0 +1,144 @@
+<div class="container">
+  <div class="row">
+    <!-- Conteúdo principal -->
+    <div class="col-12 col-md-10 col-lg-6 mx-auto mt-5">
+      <!-- Titulo -->
+      <div class="text-md-start">
+        <h1 class="fw-bold text-primary">
+            Inserir Nova Tarefa
+          </h1>
+        <hr />
+      </div>
+
+      <form [formGroup]="formCompromisso" class="mt-4">
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Assunto:</label>
+          <input
+            [ngClass]="assunto?.touched && assunto?.invalid ? 'is-invalid' : ''"
+            formControlName="assunto"
+            class="form-control"
+            type="text"
+            placeholder="Digite o título da tarefa"
+          />
+          <div class="invalid-tooltip" *ngIf="assunto?.touched && assunto?.invalid">
+            <span *ngIf="assunto?.errors?.['required']">O título precisa ser preenchido.</span>
+            <span *ngIf="assunto?.errors?.['minlength']">O título deve ter no mínimo 3 caracteres.</span>
+          </div>
+        </div>
+
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Contato:</label>
+          <ng-select formControlName="contatoId" [clearable]="false" [searchable]="false">
+            <ng-option 
+              *ngFor="let contato of (contatos$ | async)" 
+              [value]="contato.id">
+              {{contato.nome}}
+            </ng-option>
+          </ng-select>
+
+          <div class="invalid-tooltip" *ngIf="contatoId?.touched && contatoId?.invalid">
+            <span *ngIf="contatoId?.errors?.['required']">O Contato precisa ser selecionado.</span>
+          </div>
+        </div>
+
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Tipo Local:</label>
+          <ng-select
+            [ngClass]="tipoLocal?.touched && tipoLocal?.invalid ? 'is-invalid' : ''"
+            formControlName="tipoLocal" [clearable]="false" [searchable]="false">
+            <ng-option *ngFor="let local of tiposLocais ; index as i" [value]="i" >
+                {{local}}
+            </ng-option>
+          </ng-select>
+          <div class="invalid-tooltip" *ngIf="tipoLocal?.touched && tipoLocal?.invalid">
+            <span *ngIf="tipoLocal?.errors?.['required']">O Tipo do Local precisa ser selecionado.</span>
+          </div>
+        </div>
+
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Local:</label>
+          <input
+            [ngClass]="local?.touched && local?.invalid ? 'is-invalid' : ''"
+            formControlName="local"
+            class="form-control"
+            type="text"
+            placeholder="Digite o link da reunião"
+          />
+          <div class="invalid-tooltip" *ngIf="local?.touched && local?.invalid">
+            <span *ngIf="link?.errors?.['required']">O local precisa ser informado.</span>
+          </div>
+        </div>
+
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Link:</label>
+          <input
+            [ngClass]="link?.touched && link?.invalid ? 'is-invalid' : ''"
+            formControlName="link"
+            class="form-control"
+            type="text"
+            placeholder="Digite o link da reunião"
+          />
+          <div class="invalid-tooltip" *ngIf="link?.touched && link?.invalid">
+            <span *ngIf="link?.errors?.['required']">O Link precisa ser preenchido.</span>
+          </div>
+        </div>
+
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Data:</label>
+          <input
+            [ngClass]="data?.touched && data?.invalid ? 'is-invalid' : ''"
+            formControlName="data"
+            class="form-control"
+            type="date"
+            placeholder=""
+          />
+          <div class="invalid-tooltip" *ngIf="data?.touched && data?.invalid">
+            <span *ngIf="data?.errors?.['required']">A Data precisa ser informada.</span>
+          </div>
+        </div>
+
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Hora Início:</label>
+          <input
+            [ngClass]="horaInicio?.touched && horaInicio?.invalid ? 'is-invalid' : ''"
+            formControlName="horaInicio"
+            class="form-control"
+            type="time"
+            placeholder=""
+          />
+          <div class="invalid-tooltip" *ngIf="horaInicio?.touched && horaInicio?.invalid">
+            <span *ngIf="data?.errors?.['required']">A Hora Início precisa ser informada.</span>
+          </div>
+        </div>
+
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Hora Término:</label>
+          <input
+            [ngClass]="horaTermino?.touched && horaTermino?.invalid ? 'is-invalid' : ''"
+            formControlName="horaTermino"
+            class="form-control"
+            type="time"
+            placeholder=""
+          />
+          <div class="invalid-tooltip" *ngIf="horaTermino?.touched && horaTermino?.invalid">
+            <span *ngIf="horaTermino?.errors?.['required']">A Hora de Término precisa ser informada.</span>
+          </div>
+        </div>
+
+        <div class="card-footer g-grid d-flex gap-1 mt-5">
+          <button (click)="gravar()"
+            type="button" class="btn btn-primary px-5">
+            <i class="pi pi-save me-2"></i>
+            Gravar
+          </button>
+          <button routerLink="/compromissos/listar"
+            type="button" class="btn btn-outline-primary px-5">
+            <i class="pi pi-arrow-left me-2"></i>
+            Voltar
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
