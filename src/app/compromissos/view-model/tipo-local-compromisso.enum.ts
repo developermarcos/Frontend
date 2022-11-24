@@ -1,4 +1,4 @@
 export enum TipoLocalCompromissoEnum{
-  Local = 0,
-  Remoto = 1
+  Remoto = 0,
+  Presencial = 1
 }

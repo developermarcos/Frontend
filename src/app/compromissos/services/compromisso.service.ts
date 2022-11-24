@@ -22,9 +22,23 @@ export class CompromissoService extends SharedService{
       
     return resposta;
   }
+  public selecionarPorId(id: string): Observable<FormCompromissoViewModel> {
+    const resposta = this.http
+      .get<FormCompromissoViewModel[]>(this.obterUrl(id), this.obterHeadersAutorizacao())
+      .pipe(map(this.processarDados), catchError(this.processarFalha));
+      
+    return resposta;
+  }
   public inserir(formCompromissoVM: FormCompromissoViewModel) : Observable<FormCompromissoViewModel>{
     const resposta = this.http
       .post<FormCompromissoViewModel[]>(this.obterUrl(), formCompromissoVM, this.obterHeadersAutorizacao())
+      .pipe(map(this.processarDados), catchError(this.processarFalha));
+      
+    return resposta;
+  }
+  public editar(formCompromissoVM: FormCompromissoViewModel) : Observable<FormCompromissoViewModel>{
+    const resposta = this.http
+      .put<FormCompromissoViewModel[]>(this.obterUrl(formCompromissoVM.id), formCompromissoVM, this.obterHeadersAutorizacao())
       .pipe(map(this.processarDados), catchError(this.processarFalha));
       
     return resposta;

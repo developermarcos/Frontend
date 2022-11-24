@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 
 import { CompromissoRoutingModule } from './compromisso-routing.module';
 import { CompromissoAppComponent } from './compromisso-app.component';
@@ -9,13 +9,18 @@ import { InserirCompromissoComponent } from './inserir/inserir-compromisso.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ContatoService } from '../contatos/services/contato.service';
+import { EditarCompromissoComponent } from './editar/editar-compromisso.component';
+import { FormCompromissoResolver } from './services/form-compromisso.resolver';
 
+import localePt from '@angular/common/locales/pt'
 
+registerLocaleData(localePt, 'pt');
 @NgModule({
   declarations: [
     CompromissoAppComponent,
     ListarCompromissoComponent,
-    InserirCompromissoComponent
+    InserirCompromissoComponent,
+    EditarCompromissoComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +30,9 @@ import { ContatoService } from '../contatos/services/contato.service';
   ],
   providers:[
     CompromissoService,
-    ContatoService
+    ContatoService,
+    FormCompromissoResolver,
+    {provide: LOCALE_ID, useValue: 'pt'}
   ]
 })
 export class CompromissoModule { }
